@@ -1,26 +1,27 @@
 (function(angular) {
     'use strict';
     angular.module('FileManagerApp').provider('fileManagerConfig', function() {
+        const baseUrl = 'http://localhost:4001'
 
         var values = {
             appName: 'angular-filemanager v1.5',
             defaultLang: 'en',
             multiLang: true,
 
-            listUrl: 'bridges/php/handler.php',
-            uploadUrl: 'bridges/php/handler.php',
-            renameUrl: 'bridges/php/handler.php',
-            copyUrl: 'bridges/php/handler.php',
-            moveUrl: 'bridges/php/handler.php',
-            removeUrl: 'bridges/php/handler.php',
-            editUrl: 'bridges/php/handler.php',
-            getContentUrl: 'bridges/php/handler.php',
-            createFolderUrl: 'bridges/php/handler.php',
-            downloadFileUrl: 'bridges/php/handler.php',
-            downloadMultipleUrl: 'bridges/php/handler.php',
-            compressUrl: 'bridges/php/handler.php',
-            extractUrl: 'bridges/php/handler.php',
-            permissionsUrl: 'bridges/php/handler.php',
+            listUrl: `${baseUrl}/cms`,
+            uploadUrl: `${baseUrl}/`,
+            renameUrl: `${baseUrl}/`,
+            copyUrl: `${baseUrl}/`,
+            moveUrl: `${baseUrl}/`,
+            removeUrl: `${baseUrl}/`,
+            editUrl: `${baseUrl}/`,
+            getContentUrl: `${baseUrl}/`,
+            createFolderUrl: `${baseUrl}/`,
+            downloadFileUrl: `${baseUrl}/`,
+            downloadMultipleUrl: `${baseUrl}/`,
+            compressUrl: `${baseUrl}/`,
+            extractUrl: `${baseUrl}/`,
+            permissionsUrl: `${baseUrl}/`,
             basePath: '/',
 
             searchForm: true,
