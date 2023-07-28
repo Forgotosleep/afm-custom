@@ -6,6 +6,9 @@
 
         var $storage = $window.localStorage;
         $scope.config = fileManagerConfig;
+        $scope.console = console  // For testing purposes
+        $scope.siteId = 1 // TODO Change this to be dynamic with PolBo's current Site ID
+        $scope.parentId = null  // Place to store current directory's parentId
         $scope.reverse = false;
         $scope.predicate = ['model.type', 'model.name'];
         $scope.order = function(predicate) {
@@ -16,7 +19,7 @@
         $scope.fileNavigator = new FileNavigator();
         $scope.apiMiddleware = new ApiMiddleware();
         $scope.uploadFileList = [];
-        $scope.viewTemplate = $storage.getItem('viewTemplate') || 'main-icons.html';
+        $scope.viewTemplate = $storage.getItem('viewTemplate') || 'main-table.html';
         $scope.fileList = [];
         $scope.temps = [];
 
@@ -148,13 +151,17 @@
             $scope.apiMiddleware.apiHandler.inprocess = true;
             $scope.modal('imagepreview', null, true)
                 .find('#imagepreview-target')
-                .attr('src', $scope.getUrl(item))
+                .attr('src', $scope.getImagePreview(item))
                 .unbind('load error')
                 .on('load error', function() {
                     $scope.apiMiddleware.apiHandler.inprocess = false;
                     $scope.$apply();
                 });
         };
+
+        $scope.getImagePreview = function(_item) {
+            return $scope.apiMiddleware.getImagePreview(_item);
+        }
 
         $scope.openEditItem = function() {
             var item = $scope.singleSelection();

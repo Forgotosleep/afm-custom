@@ -1,12 +1,15 @@
 <table class="table mb0 table-files noselect">
     <thead>
         <tr>
-            <th>
+            <th> 
                 <a href="" ng-click="order('model.name')">
                     {{"name" | translate}}
                     <span class="sortorder" ng-show="predicate[1] === 'model.name'" ng-class="{reverse:reverse}"></span>
                 </a>
             </th>
+
+            <th>Author</th>  <!-- TODO Create Author Column Header -->
+
             <th class="hidden-xs" ng-hide="config.hideSize">
                 <a href="" ng-click="order('model.size')">
                     {{"size" | translate}}
@@ -51,6 +54,9 @@
                     {{item.model.name | strLimit : 64}}
                 </a>
             </td>
+
+            <td> PC </td>  <!-- TODO Create Author Column Content -->
+            
             <td class="hidden-xs">
                 <span ng-show="item.model.type !== 'dir' || config.showSizeForDirectories">
                     {{item.model.size | humanReadableFileSize}}

@@ -378,11 +378,25 @@
                 return deferred.promise;
             };
 
-            ApiHandler.prototype.getUrl = function (apiUrl, path) {
+            ApiHandler.prototype.getUrl = function (apiUrl, path, preview) {
                 var data = {
-                    action: "download",
+                    mode: "download",
                     path: path,
                 };
+                if(preview) {
+                    return 
+                }
+                return path && [apiUrl, $httpParamSerializer(data)].join('?');
+            };
+    
+            ApiHandler.prototype.getImagePreview = function(apiUrl, path, preview) {
+                var data = {
+                    path: path,
+                    preview: true
+                };
+                if(preview) {
+                    return 
+                }
                 return path && [apiUrl, $httpParamSerializer(data)].join("?");
             };
 
