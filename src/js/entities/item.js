@@ -4,18 +4,30 @@
 
         var Item = function(model, path) {
             var rawModel = {
+                id: model && model.id || 0,
                 name: model && model.name || '',
                 path: path || [],
                 type: model && model.type || 'file',
+                mime_types: model && model.mime_types || '',
                 size: model && parseInt(model.size || 0),
                 date: parseMySQLDate(model && model.date),
                 perms: new Chmod(model && model.rights),
                 content: model && model.content || '',
                 recursive: false,
                 fullPath: function() {
+                    // console.log('Item FULLPATH is run!');
                     var path = this.path.filter(Boolean);
+                    // console.log('Item PATH var: ', path);
+                    // console.log(('prcessed: ', ('/' + path.join('/') + '/' + this.name).replace(/\/\//, '/')));
                     return ('/' + path.join('/') + '/' + this.name).replace(/\/\//, '/');
-                }
+                },
+                site_id: model && parseInt(model.site_id) || null,
+                parent_id: model && parseInt(model.parent_id) || null,
+                parent_ids: model.parent_ids && JSON.parse(model.parent_ids) || [],
+                last_modified_user_id: model && model.last_modified_user_id || 0,
+                last_modified_user_name: model && model.last_modified_user_name || '',
+                created_user_id: model && model.created_user_id || 0,
+                created_user_name: model && model.created_user_name || '',
             };
 
             this.error = '';

@@ -56,9 +56,51 @@
                 return deferred.resolve(data);
             };
 
+            // ApiHandler.prototype.list = function (  // Original LS Fetch
+            //     apiUrl,
+            //     path,
+            //     customDeferredHandler,
+            //     exts
+            // ) {
+            //     var self = this;
+            //     var dfHandler = customDeferredHandler || self.deferredHandler;
+            //     var deferred = $q.defer();
+            //     var data = {
+            //         params: {
+            //             mode: "list",
+            //             path: path,
+            //             fileExtensions: exts && exts.length ? exts : undefined,
+            //         },
+            //     };
+
+            //     self.inprocess = true;
+            //     self.error = "";
+
+            //     $http
+            //         .post(apiUrl, data)
+            //         .then(
+            //             function (response) {
+            //                 dfHandler(response.data, deferred, response.status);
+            //             },
+            //             function (response) {
+            //                 dfHandler(
+            //                     response.data,
+            //                     deferred,
+            //                     response.status,
+            //                     "Unknown error listing, check the response"
+            //                 );
+            //             }
+            //         )
+            //         ["finally"](function () {
+            //             self.inprocess = false;
+            //         });
+            //     return deferred.promise;
+            // };
+
             ApiHandler.prototype.list = function (
                 apiUrl,
-                path,
+                siteId, 
+                parentId,
                 customDeferredHandler,
                 exts
             ) {
@@ -67,8 +109,9 @@
                 var deferred = $q.defer();
                 var data = {
                     params: {
-                        mode: "list",
-                        path: path,
+                        mode: "listByIds",
+                        siteId: siteId,
+                        parentId: parentId,
                         fileExtensions: exts && exts.length ? exts : undefined,
                     },
                 };

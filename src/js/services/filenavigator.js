@@ -10,6 +10,9 @@
             this.currentPath = this.getBasePath();
             this.history = [];
             this.error = '';
+            this.currentParentId = fileManagerConfig.defaultParentId;  // Placeholder value, should get from last fetched LS or initial Parent ID
+            this.currentSiteId = fileManagerConfig.defaultSiteId;  // same as above
+            this.parentIdTree = [];  // default is similar to fileList and path, an empty array
 
             this.onRefresh = function() {};
         };
@@ -44,8 +47,12 @@
             return deferred.resolve(data);
         };
 
+        // FileNavigator.prototype.list = function() {
+        //     return this.apiMiddleware.list(this.currentPath, this.deferredHandler.bind(this));
+        // };
+
         FileNavigator.prototype.list = function() {
-            return this.apiMiddleware.list(this.currentPath, this.deferredHandler.bind(this));
+            return this.apiMiddleware.list(this.currentSiteId, this.currentParentId, this.deferredHandler.bind(this));
         };
 
         FileNavigator.prototype.refresh = function() {
@@ -63,6 +70,14 @@
                 self.buildTree(path);
                 self.onRefresh();
             }).finally(function() {
+
+                // console.log('THIS IS FILE NAVIGATOR FINALLY FROM REFRESH');
+                // console.log('Current Path: ', self.currentPath);
+                // console.log('File List: ', self.fileList);
+                // console.log('Current Parent ID: ', self.currentParentId);
+                // console.log('Current Site ID: ', self.currentSiteId);
+                // console.log('Parent ID Tree: ', self.parentIdTree);
+
                 self.requesting = false;
             });
         };
@@ -120,20 +135,34 @@
 
         FileNavigator.prototype.folderClick = function(item) {
             this.currentPath = [];
+            // console.log('This is FILENAVIGATOR folderClick');
+            // console.log('ITEM: ', item);
+
             if (item && item.isFolder()) {
+                this.currentSiteId = item.model.site_id;
+                this.currentParentId = item.model.id;
+                this.parentIdTree = item.model.parent_ids;
+                if(this.currentParentId != this.parentIdTree[this.parentIdTree.length - 1]) this.parentIdTree.push(item.model.id);  // Prevents duplicates being added to parentIdTree
                 this.currentPath = item.model.fullPath().split('/').splice(1);
+            } else if(item === undefined) {
+                this.currentParentId = fileManagerConfig.defaultParentId;
             }
             this.refresh();
         };
 
         FileNavigator.prototype.upDir = function() {
+            // console.log('This is FILENAVIGATOR upDir');
+
             if (this.currentPath[0]) {
+                this.currentParentId = this.parent_id;
                 this.currentPath = this.currentPath.slice(0, -1);
                 this.refresh();
             }
         };
 
         FileNavigator.prototype.goTo = function(index) {
+            // console.log('This is FILENAVIGATOR goTo');
+            this.currentParentId = this.parentIdTree[this.parentIdTree.length - 1];
             this.currentPath = this.currentPath.slice(0, index + 1);
             this.refresh();
         };

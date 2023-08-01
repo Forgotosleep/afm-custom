@@ -23,6 +23,9 @@
             extractUrl: `${baseUrl}/`,
             permissionsUrl: `${baseUrl}/`,
             basePath: '/',
+            defaultParentId: null,    // TODO Change this to be dynamic and loaded from PolBo
+            defaultSiteId: 1,  // TODO Change this to be dynamic and loaded from PolBo
+            
 
             searchForm: true,
             sidebar: true,

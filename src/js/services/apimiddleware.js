@@ -21,8 +21,16 @@
             return item && item.model.fullPath();
         };
 
-        ApiMiddleware.prototype.list = function(path, customDeferredHandler) {
-            return this.apiHandler.list(fileManagerConfig.listUrl, this.getPath(path), customDeferredHandler);
+        // ApiMiddleware.prototype.list = function(path, customDeferredHandler) {  // Original LS Fetch. This uses 'path' as the base. We need to change it into Site ID and Parent ID instead
+        //     return this.apiHandler.list(fileManagerConfig.listUrl, this.getPath(path), customDeferredHandler);
+        // };
+
+        ApiMiddleware.prototype.list = function(siteId, parentId, customDeferredHandler) {  
+            // console.log('THIS IS APIMIDDLEWARE MODIFIED LIST');  for testing purposes
+            // console.log('siteId: ', siteId);
+            // console.log('parentId: ', parentId);
+            // console.log('defer:', customDeferredHandler);
+            return this.apiHandler.list(fileManagerConfig.listUrl, siteId, parentId, customDeferredHandler);
         };
 
         ApiMiddleware.prototype.copy = function(files, path) {
