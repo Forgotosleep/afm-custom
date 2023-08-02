@@ -71,6 +71,7 @@
                 self.onRefresh();
             }).finally(function() {
 
+                /* For testing purposes */
                 // console.log('THIS IS FILE NAVIGATOR FINALLY FROM REFRESH');
                 // console.log('Current Path: ', self.currentPath);
                 // console.log('File List: ', self.fileList);
@@ -152,9 +153,8 @@
 
         FileNavigator.prototype.upDir = function() {
             // console.log('This is FILENAVIGATOR upDir');
-
             if (this.currentPath[0]) {
-                this.currentParentId = this.parent_id;
+                this.currentParentId = this.parentIdTree[this.parentIdTree.length - 2];
                 this.currentPath = this.currentPath.slice(0, -1);
                 this.refresh();
             }
@@ -162,7 +162,9 @@
 
         FileNavigator.prototype.goTo = function(index) {
             // console.log('This is FILENAVIGATOR goTo');
-            this.currentParentId = this.parentIdTree[this.parentIdTree.length - 1];
+            // console.log('goto Index: ', index);
+            this.currentParentId = this.parentIdTree[index];
+            this.parentIdTree = index != -1 ? this.parentIdTree.slice(0, index + 1) : []
             this.currentPath = this.currentPath.slice(0, index + 1);
             this.refresh();
         };
