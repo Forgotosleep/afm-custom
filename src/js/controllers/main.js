@@ -328,16 +328,28 @@
         };
 
         $scope.addForUpload = function($files) {
+            console.log('MAIN Add For Upload triggerred!');  // for testing purposes
             $scope.uploadFileList = $scope.uploadFileList.concat($files);
             $scope.modal('uploadfile');
         };
 
         $scope.removeFromUpload = function(index) {
+            console.log('MAIN Remove For Upload triggerred!');  // for testing purposes
             $scope.uploadFileList.splice(index, 1);
         };
 
         $scope.uploadFiles = function() {
-            $scope.apiMiddleware.upload($scope.uploadFileList, $scope.fileNavigator.currentPath).then(function() {
+            console.log('MAIN Upload Files triggerred!');  // for testing purposes
+            console.log('MAIN Parent ID: ', $scope.fileNavigator);  // for testing purposes
+
+            var extraData = {
+                siteId: $scope.fileNavigator.currentSiteId,
+                parentId: $scope.fileNavigator.currentParentId,
+                parentIds: $scope.fileNavigator.parentIdTree && JSON.stringify($scope.fileNavigator.parentIdTree),
+                createdBy: 1,  // TODO Change this into dynamic based on current user login data in project
+            }
+
+            $scope.apiMiddleware.upload($scope.uploadFileList, $scope.fileNavigator.currentPath, extraData).then(function() {
                 $scope.fileNavigator.refresh();
                 $scope.uploadFileList = [];
                 $scope.modal('uploadfile', true);

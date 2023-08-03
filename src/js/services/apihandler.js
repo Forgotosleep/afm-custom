@@ -258,26 +258,55 @@
             ApiHandler.prototype.upload = function (
                 apiUrl,
                 destination,
-                files
+                files,
+                extraData
             ) {
                 var self = this;
                 var deferred = $q.defer();
                 self.inprocess = true;
                 self.progress = 0;
                 self.error = "";
-
+                
                 var data = {
                     destination: destination,
-                };
-
-                for (var i = 0; i < files.length; i++) {
-                    data["file-" + i] = files[i];
+                    files: files,
+                    siteId: extraData.siteId,
+                    parentId: extraData.parentId,
+                    parentIds: extraData.parentIds,
+                    isFolder: false,
+                    createdBy: 1,
                 }
+                
+
+                console.log('APIHANDLER here');  // for testing purposes
+                console.log('apiUrl: ', apiUrl);  // for testing purposes
+                console.log('destination: ', destination);  // for testing purposes
+                console.log('files: ', files);  // for testing purposes
+                console.log('data: ', data);  // for testing purposes
+                
+                // for (var i = 0; i < files.length; i++) {
+                //     // fileList.push(files[i]);
+                //     data.files.push(files[i])
+                // }
+                
+                // console.log('files list: ', fileList);
+                // console.log('files list 0: ', fileList[0]);
+                // console.log('appended data: ', data);
+
+                // data.append('files', fileList)
+
 
                 if (files && files.length) {
                     Upload.upload({
                         url: apiUrl,
+                        method: 'POST',
                         data: data,
+                        arrayKey: '',  // prevents argument name tampering (e.g. files[0], files[1])
+                        // data: data,
+                        
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
                     })
                         .then(
                             function (data) {

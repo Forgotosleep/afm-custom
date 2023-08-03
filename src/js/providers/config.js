@@ -9,7 +9,7 @@
             multiLang: true,
 
             listUrl: `${baseUrl}/cms`,
-            uploadUrl: `${baseUrl}/`,
+            uploadUrl: `${baseUrl}/upload`,
             renameUrl: `${baseUrl}/`,
             copyUrl: `${baseUrl}/`,
             moveUrl: `${baseUrl}/`,
