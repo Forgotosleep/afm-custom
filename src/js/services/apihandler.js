@@ -274,15 +274,15 @@
                     parentId: extraData.parentId,
                     parentIds: extraData.parentIds,
                     isFolder: false,
-                    createdBy: 1,
+                    createdBy: 1,  // TODO Change to be dynamic with current logged-in user
                 }
                 
 
-                console.log('APIHANDLER here');  // for testing purposes
-                console.log('apiUrl: ', apiUrl);  // for testing purposes
-                console.log('destination: ', destination);  // for testing purposes
-                console.log('files: ', files);  // for testing purposes
-                console.log('data: ', data);  // for testing purposes
+                // console.log('APIHANDLER here');  // for testing purposes
+                // console.log('apiUrl: ', apiUrl);  // for testing purposes
+                // console.log('destination: ', destination);  // for testing purposes
+                // console.log('files: ', files);  // for testing purposes
+                // console.log('data: ', data);  // for testing purposes
                 
                 // for (var i = 0; i < files.length; i++) {
                 //     // fileList.push(files[i]);
@@ -302,8 +302,6 @@
                         method: 'POST',
                         data: data,
                         arrayKey: '',  // prevents argument name tampering (e.g. files[0], files[1])
-                        // data: data,
-                        
                         headers: {
                             'Content-Type': 'multipart/form-data'
                         }
