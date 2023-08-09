@@ -276,25 +276,6 @@
                     isFolder: false,
                     createdBy: 1,  // TODO Change to be dynamic with current logged-in user
                 }
-                
-
-                // console.log('APIHANDLER here');  // for testing purposes
-                // console.log('apiUrl: ', apiUrl);  // for testing purposes
-                // console.log('destination: ', destination);  // for testing purposes
-                // console.log('files: ', files);  // for testing purposes
-                // console.log('data: ', data);  // for testing purposes
-                
-                // for (var i = 0; i < files.length; i++) {
-                //     // fileList.push(files[i]);
-                //     data.files.push(files[i])
-                // }
-                
-                // console.log('files list: ', fileList);
-                // console.log('files list 0: ', fileList[0]);
-                // console.log('appended data: ', data);
-
-                // data.append('files', fileList)
-
 
                 if (files && files.length) {
                     Upload.upload({

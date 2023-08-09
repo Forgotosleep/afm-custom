@@ -47,7 +47,7 @@
             return deferred.resolve(data);
         };
 
-        // FileNavigator.prototype.list = function() {
+        // FileNavigator.prototype.list = function() {  // Depreciated. 'path' version
         //     return this.apiMiddleware.list(this.currentPath, this.deferredHandler.bind(this));
         // };
 

@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
     angular.module('FileManagerApp').provider('fileManagerConfig', function() {
-        const baseUrl = 'http://localhost:4001'
+        const baseUrl = 'http://localhost:4001'  // TODO Change this to be moree appropriate for staging & production
 
         var values = {
             appName: 'angular-filemanager v1.5',
@@ -17,8 +17,8 @@
             editUrl: `${baseUrl}/`,
             getContentUrl: `${baseUrl}/`,
             createFolderUrl: `${baseUrl}/`,
-            downloadFileUrl: `${baseUrl}/`,
-            downloadMultipleUrl: `${baseUrl}/`,
+            downloadFileUrl: `${baseUrl}/dl`,
+            downloadMultipleUrl: `${baseUrl}/dl`,
             compressUrl: `${baseUrl}/`,
             extractUrl: `${baseUrl}/`,
             permissionsUrl: `${baseUrl}/`,
